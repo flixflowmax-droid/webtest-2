@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth bg-gray-50">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account - LUXE FASHION</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: 'var(--primary-color)',
+                        'primary-hover': 'var(--primary-hover)',
+                        'primary-contrast': 'var(--primary-contrast)',
+                        secondary: 'var(--secondary-color)',
+                        accent: 'var(--accent-color)',
+                        background: 'var(--bg-color)',
+                    },
+                    fontFamily: {
+                        sans: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="page-enter text-black font-sans h-screen flex flex-col justify-between items-center overflow-x-hidden p-6 relative"> <!-- Absolute BG Elements -->
+    
+    <!-- Animated background patterns -->
+    <div class="fixed top-0 left-0 w-full h-full pointer-events-none z-[-1] overflow-hidden bg-gradient-to-br from-white to-gray-100">
+        <div class="absolute top-[-10%] right-[-10%] w-[50%] h-[50%] bg-[--primary-color] rounded-full blur-[150px] opacity-10 animate-pulse"></div>
+        <div class="absolute bottom-[-10%] left-[-10%] w-[50%] h-[50%] bg-[--secondary-color] rounded-full blur-[150px] opacity-10 animate-pulse" style="animation-delay: 2s;"></div>
+    </div>
+
+    <!-- Header Logo -->
+    <a href="home.html" class="flex items-center gap-2 text-2xl font-bold tracking-tighter mt-10 relative z-10 transition-transform hover:scale-105">
+        <img src="assets/logo.png" alt="Logo" class="site-logo h-6 w-auto object-contain">
+        <span>LUXE FASHION</span>
+    </a>
+
+    <!-- Auth Container -->
+    <main class="w-full max-w-md bg-white rounded-2xl shadow-2xl overflow-hidden relative z-10 my-10 border border-gray-100 p-10 transform translate-y-4 opacity-0 animate-[fadeIn_0.5s_0.2s_ease-out_forwards]">
+        
+        <!-- Toggle Tabs -->
+        <div class="flex border-b border-gray-200 mb-8 relative">
+            <button id="tab-login" class="flex-1 pb-4 text-center font-bold text-sm tracking-wider uppercase transition text-black" onclick="switchTab('login')">Sign In</button>
+            <button id="tab-signup" class="flex-1 pb-4 text-center font-bold text-sm tracking-wider uppercase transition text-gray-400" onclick="switchTab('signup')">Sign Up</button>
+            <div id="tab-indicator" class="absolute bottom-[-1px] left-0 w-1/2 h-0.5 bg-[--primary-color] transition-all duration-300"></div>
+        </div>
+
+        <!-- Login Form -->
+        <form id="form-login" class="space-y-6 transition-opacity duration-300">
+            <div>
+                <label class="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Email Address</label>
+                <div class="relative">
+                    <i class="fa-regular fa-envelope absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                    <input type="email" id="log-email" required class="w-full border border-gray-300 rounded-lg pl-10 pr-4 py-3 text-sm focus:outline-none focus:border-[--primary-color] focus:ring-1 focus:ring-[--primary-color] transition bg-gray-50 focus:bg-white" placeholder="you@example.com">
+                </div>
+            </div>
+            <div>
+                <div class="flex justify-between items-center mb-2">
+                    <label class="block text-xs font-semibold text-gray-500 uppercase tracking-wider">Password</label>
+                    <a href="#" class="text-[10px] text-gray-400 hover:text-black underline tracking-wide">Forgot Password?</a>
+                </div>
+                <div class="relative">
+                    <i class="fa-solid fa-lock absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                    <input type="password" id="log-pass" required class="w-full border border-gray-300 rounded-lg pl-10 pr-4 py-3 text-sm focus:outline-none focus:border-[--primary-color] focus:ring-1 focus:ring-[--primary-color] transition bg-gray-50 focus:bg-white" placeholder="••••••••">
+                </div>
+            </div>
+            
+            <button type="submit" class="btn-primary w-full py-4 rounded-lg font-bold text-sm uppercase tracking-wide group flex justify-center items-center gap-2">
+                Sign In
+                <i class="fa-solid fa-arrow-right-to-bracket transition-transform group-hover:translate-x-1"></i>
+            </button>
+        </form>
+
+        <!-- Sign Up Form (Initially Hidden) -->
+        <form id="form-signup" class="space-y-6 hidden transition-opacity duration-300">
+            <div>
+                <label class="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Full Name</label>
+                <div class="relative">
+                    <i class="fa-regular fa-user absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                    <input type="text" id="reg-name" required class="w-full border border-gray-300 rounded-lg pl-10 pr-4 py-3 text-sm focus:outline-none focus:border-[--primary-color] focus:ring-1 focus:ring-[--primary-color] transition bg-gray-50 focus:bg-white" placeholder="John Doe">
+                </div>
+            </div>
+            <div>
+                <label class="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Email Address</label>
+                <div class="relative">
+                    <i class="fa-regular fa-envelope absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                    <input type="email" id="reg-email" required class="w-full border border-gray-300 rounded-lg pl-10 pr-4 py-3 text-sm focus:outline-none focus:border-[--primary-color] focus:ring-1 focus:ring-[--primary-color] transition bg-gray-50 focus:bg-white" placeholder="you@example.com">
+                </div>
+            </div>
+            <div>
+                <label class="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Password</label>
+                <div class="relative">
+                    <i class="fa-solid fa-lock absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                    <input type="password" id="reg-pass" required minlength="6" class="w-full border border-gray-300 rounded-lg pl-10 pr-4 py-3 text-sm focus:outline-none focus:border-[--primary-color] focus:ring-1 focus:ring-[--primary-color] transition bg-gray-50 focus:bg-white" placeholder="Min 6 characters">
+                </div>
+            </div>
+            
+            <button type="submit" class="btn-primary w-full py-4 rounded-lg font-bold text-sm uppercase tracking-wide group flex justify-center items-center gap-2">
+                Create Account
+                <i class="fa-solid fa-user-plus transition-transform group-hover:translate-x-1"></i>
+            </button>
+            
+            <p class="text-xs text-gray-400 text-center mt-4">By creating an account, you agree to our <a href="terms.html" class="underline hover:text-black">Terms</a> and <a href="privacy.html" class="underline hover:text-black">Privacy Policy</a>.</p>
+        </form>
+
+        <!-- OAuth / Social login demo -->
+        <div class="mt-8 pt-6 border-t border-gray-100 flex flex-col gap-3">
+            <button class="w-full border border-gray-300 rounded-lg py-3 text-sm font-semibold hover:bg-gray-50 transition flex justify-center items-center gap-3">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" class="w-4 h-4">
+                Continue with Google
+            </button>
+        </div>
+    </main>
+
+    <p class="text-xs text-gray-400 mb-10 tracking-widest uppercase">Secure Login Gateway</p>
+
+    <!-- Error/Success Toast -->
+    <div id="toast" class="fixed top-6 right-6 px-6 py-4 rounded-lg shadow-lg text-white font-medium text-sm transition-transform duration-300 translate-x-[150%] z-50">
+        Message
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // Check if already logged in via API
+            fetch('api/auth.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ action: 'check_session' })
+            }).then(r => r.json()).then(res => {
+                if(res.success) window.location.href = 'dashboard.html';
+            });
+
+            const tabLogin = document.getElementById('tab-login');
+            const tabSignup = document.getElementById('tab-signup');
+            const indc = document.getElementById('tab-indicator');
+            const fLogin = document.getElementById('form-login');
+            const fSignup = document.getElementById('form-signup');
+
+            window.switchTab = (tab) => {
+                if(tab === 'login') {
+                    indc.style.left = '0';
+                    tabLogin.classList.replace('text-gray-400', 'text-black');
+                    tabSignup.classList.replace('text-black', 'text-gray-400');
+                    
+                    fSignup.style.opacity = '0';
+                    setTimeout(() => {
+                        fSignup.classList.add('hidden');
+                        fLogin.classList.remove('hidden');
+                        setTimeout(() => fLogin.style.opacity = '1', 50);
+                    }, 200);
+
+                } else {
+                    indc.style.left = '50%';
+                    tabSignup.classList.replace('text-gray-400', 'text-black');
+                    tabLogin.classList.replace('text-black', 'text-gray-400');
+                    
+                    fLogin.style.opacity = '0';
+                    setTimeout(() => {
+                        fLogin.classList.add('hidden');
+                        fSignup.classList.remove('hidden');
+                        setTimeout(() => fSignup.style.opacity = '1', 50);
+                    }, 200);
+                }
+            };
+
+            function showToast(msg, isError = true) {
+                const toast = document.getElementById('toast');
+                toast.innerText = msg;
+                toast.className = `fixed top-6 right-6 px-6 py-4 rounded-lg shadow-lg text-white font-medium text-sm transition-transform duration-300 z-50 transform flex items-center gap-2 ${isError ? 'bg-red-500' : 'bg-green-500'}`;
+                toast.innerHTML = `<i class="fa-solid ${isError ? 'fa-circle-xmark' : 'fa-circle-check'}"></i> ${msg}`;
+                
+                requestAnimationFrame(() => toast.style.transform = 'translateX(0)');
+                
+                setTimeout(() => {
+                    toast.style.transform = 'translateX(150%)';
+                }, 3000);
+            }
+
+            // Register Setup
+            fSignup.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const name = document.getElementById('reg-name').value;
+                const email = document.getElementById('reg-email').value;
+                const pass = document.getElementById('reg-pass').value;
+
+                if(pass.length < 6) return showToast('Password too short. Minimum 6 characters.');
+
+                const btn = e.target.querySelector('button[type="submit"]');
+                const originalText = btn.innerHTML;
+                btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Creating...';
+                
+                try {
+                    const res = await fetch('api/auth.php', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ action: 'register', name, email, password: pass, phone: '' })
+                    });
+                    const data = await res.json();
+                    
+                    if(data.success) {
+                        showToast('Account created successfully!', false);
+                        setTimeout(() => window.location.href = 'dashboard.html', 1000);
+                    } else {
+                        showToast(data.message);
+                        btn.innerHTML = originalText;
+                    }
+                } catch(err) {
+                    console.error(err);
+                    showToast('Network error: ' + err.message);
+                    btn.innerHTML = originalText;
+                }
+            });
+
+            // Login Setup
+            fLogin.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const email = document.getElementById('log-email').value;
+                const pass = document.getElementById('log-pass').value;
+
+                const btn = e.target.querySelector('button[type="submit"]');
+                const originalText = btn.innerHTML;
+                btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Authenticating...';
+
+                try {
+                    const res = await fetch('api/auth.php', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ action: 'login', email, password: pass })
+                    });
+                    const data = await res.json();
+                    
+                    if(data.success) {
+                        showToast('Welcome back!', false);
+                        setTimeout(() => {
+                            const cartData = JSON.parse(localStorage.getItem('luxury_cart')) || [];
+                            window.location.href = cartData.length > 0 ? 'checkout.html' : 'dashboard.html';
+                        }, 1000);
+                    } else {
+                        showToast(data.message);
+                        btn.innerHTML = originalText;
+                    }
+                } catch(err) {
+                    console.error(err);
+                    showToast('Network error: ' + err.message);
+                    btn.innerHTML = originalText;
+                }
+            });
+        });
+    </script>
+</body>
+</html>

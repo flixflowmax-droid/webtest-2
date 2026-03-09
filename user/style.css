@@ -1,0 +1,285 @@
+/* style.css */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap');
+
+:root {
+    --primary-color: #ff0055;
+    --primary-hover: #e0004b;
+    --primary-glow: rgba(255, 0, 85, 0.25);
+    --primary-soft: #ffb3c6;
+    --primary-contrast: #ffffff;
+    --secondary-color: #1a1a2e;
+    --secondary-contrast: #ffffff;
+    --accent-color: #ffb3c6;
+    --bg-color: #fafafa;
+    --card-bg: #ffffff;
+    --text-color: #111111;
+    --text-light: #666666;
+    --border-color: #eaeaea;
+    --transition-base: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 🟢 Base Transitions & Smoothness */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+
+a, button, input {
+    transition: var(--transition-base);
+}
+
+.product-card {
+    transition: var(--transition-base);
+    background: var(--card-bg);
+    border-radius: 1rem;
+    overflow: hidden;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.product-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 20px 40px var(--primary-glow);
+}
+
+/* 🟢 Prevent Horizontal Scroll & White Space */
+html, body {
+    font-family: 'Outfit', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    overflow-x: hidden !important;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.page-enter {
+    animation: fadeIn 0.6s ease-in-out forwards;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.reveal {
+    opacity: 0;
+    transform: translateY(30px) scale(0.98);
+    transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: opacity, transform;
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+.glass {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.dark-glass {
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Image Hover Swaps */
+.product-card .img-primary {
+    transition: opacity 0.5s ease;
+    opacity: 1;
+}
+
+.product-card .img-secondary {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    opacity: 0;
+    transform: scale(1.05);
+}
+
+.product-card:hover .img-primary {
+    opacity: 0;
+}
+
+.product-card:hover .img-secondary {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* 🟢 Cart Drawer Fix */
+.cart-drawer {
+    position: fixed;
+    top: 0;
+    right: -450px; /* Hidden off-screen */
+    width: 450px;
+    max-width: 100%;
+    height: 100vh;
+    background: var(--card-bg);
+    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.1);
+    transition: var(--transition-base);
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.cart-drawer.open {
+    right: 0;
+}
+
+.cart-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+    z-index: 100000;
+    backdrop-filter: blur(3px);
+}
+
+.cart-overlay.open {
+    opacity: 1;
+    pointer-events: all;
+}
+
+/* 🟢 Mobile Menu Overlay FIX */
+.mobile-menu-overlay {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 50vw;
+    min-width: 300px;
+    height: 100vh;
+    background: var(--card-bg);
+    z-index: 100005;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transform: translateX(100%);
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: -10px 0 30px rgba(0,0,0,0.1);
+}
+
+.mobile-menu-overlay.open {
+    transform: translateX(0);
+}
+
+.mobile-menu-overlay a {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: var(--text-color);
+    margin-bottom: 1.5rem;
+    text-decoration: none;
+    transition: color 0.3s;
+    letter-spacing: -0.02em;
+}
+
+.mobile-menu-overlay a:hover {
+    color: var(--primary-color);
+}
+
+/* Button & UI Components */
+.btn-primary {
+    background-color: var(--primary-color);
+    color: var(--primary-contrast);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    border: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+.search-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--card-bg);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+    border-radius: 0 0 1rem 1rem;
+    max-height: 400px;
+    overflow-y: auto;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    z-index: 50;
+}
+
+/* 🟢 Horizontal Slider Components */
+.slider-container {
+    display: flex;
+    overflow-x: auto;
+    gap: 1.5rem;
+    padding-bottom: 1.5rem;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch; /* smooth momentum scrolling */
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.slider-container::-webkit-scrollbar {
+    display: none;
+}
+/* Hide scrollbar for IE, Edge and Firefox */
+.slider-container {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+.slider-item {
+    scroll-snap-align: start;
+    flex: 0 0 calc(50% - 1rem); /* default 2 items mobile */
+}
+
+@media (min-width: 768px) {
+    .slider-item {
+        flex: 0 0 calc(25% - 1rem); /* 4 items tablet */
+    }
+}
+
+@media (min-width: 1024px) {
+    .slider-item {
+        flex: 0 0 calc(16.666% - 1rem); /* 6 items desktop */
+    }
+}
+
+/* View All Card */
+.view-all-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--secondary-color);
+    color: var(--secondary-contrast);
+    text-decoration: none;
+    border-radius: 0.5rem;
+    transition: background-color 0.3s ease;
+    scroll-snap-align: start;
+}
+.view-all-card:hover {
+    background-color: var(--text-color);
+}
